@@ -1,10 +1,7 @@
 package infinite
 
 import "fmt"
-import (
-	"time"
-	"os"
-)
+import  "os"
 
 func Infinite01 (msg string) {
 
@@ -26,7 +23,7 @@ func Infinite01 (msg string) {
 		}
 
 		fmt.Println(msg)
-		time.Sleep(time.Second)
+
 	}
 
 }
