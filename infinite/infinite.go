@@ -1,11 +1,31 @@
 package infinite
 
 import "fmt"
-import "time"
+import (
+	"time"
+	"os"
+)
 
 func Infinite01 (msg string) {
+
+	var input string
+
 	for i := 0; ; i++ {
-		fmt.Println(msg, i)
+
+		fmt.Scan(&input)
+		if input == "quit" {
+			fmt.Println("Prosessen er avsluttet.")
+			os.Exit(0)
+
+
+		}
+		if input == "term" {
+			fmt.Println("Prosessen er terminert.")
+			os.Exit(0)
+
+		}
+
+		fmt.Println(msg)
 		time.Sleep(time.Second)
 	}
 
