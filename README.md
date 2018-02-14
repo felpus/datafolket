@@ -66,5 +66,5 @@ term
 Programmet reagerer ved å produsere meldingene «Prosessen er avsluttet.» eller «Prosessen er terminert.».
 
 Oppgave 4
-
+Denne oppgaven besvares i ascii.go.
 
