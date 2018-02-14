@@ -43,11 +43,12 @@ For å gå fra heksadesimal så må man starte med å vite at grunntallet er 16.
 
 Oppgave 2
 
-I sorting.go er den modifiserte bubble sort funksjonen som er en mer effektiv bubble sort algorytme.
+I sorting.go er den modifiserte bubble sort funksjonen som er en raskere bubble sort algorytme.
 
-Sorting_test.go har en samling benchmarks som lar oss teste effektiviteten på de forskjellige algorytmene i programmet.
+Sorting_test.go har en samling benchmarks som lar oss teste effektiviteten på de forskjellige algorytmene i programmet. 
 https://github.com/felpus/datafolket/blob/master/Oppgave%202/algorithms/benchmarkresult.PNG
-Bubble sort er en algorytme som blir svært ineffektiv jo mer tid kalkulasjonen tar, den er plasseffektiv men fungerer svært dårlig ved høyt antall operasjoner.
+
+Bubble sort er en algorytme som blir svært ineffektiv jo større utregningen er tar, den er plasseffektiv men fungerer svært dårlig ved høyt antall operasjoner.
 
 Vår modifiserte bubble stort algorytme er betydelig raskere, den er nesten 20% raskere på 10000 benchmarken, ca 40% på 1000 og går ned til ca 10% på 100.
 
