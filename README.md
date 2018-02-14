@@ -43,6 +43,8 @@ For å gå fra heksadesimal så må man starte med å vite at grunntallet er 16.
 
 Oppgave 2
 
+https://github.com/felpus/datafolket/tree/master/Oppgave%202/algorithms
+
 I sorting.go er den modifiserte bubble sort funksjonen som er en raskere bubble sort algorytme.
 
 Sorting_test.go har en samling benchmarks som lar oss teste effektiviteten på de forskjellige algorytmene i programmet. 
