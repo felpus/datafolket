@@ -1,11 +1,25 @@
 # datafolket
 Oppgave 1
-Binære tall	  | Hexadesimaltall	  | Desimaltall
-1101	              0xD	              13
-110111101010	      0xDEA	            3562
-1010111100110100	  0xAF34	          44852
-1111111111111111	  0xFFFF	          65535
-10001011110001010	  0x1178A	          71562
+Binære tall	
+1101	             	             
+110111101010	      	            
+1010111100110100	            
+1111111111111111	  	          
+10001011110001010	            
+
+Hexadesimaltall
+0xD
+0xDEA
+00xFFFFxAF34	
+0xFFFF
+0x1178A	
+
+Desimaltall
+13
+3562
+44852
+65535
+71562
 
 1a.
 
