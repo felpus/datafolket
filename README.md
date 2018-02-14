@@ -42,7 +42,6 @@ For å gå fra heksadesimal så må man starte med å vite at grunntallet er 16.
 
 
 Oppgave 2
-I oppgave 2/algorythms finner man sorting.go og sorting_test.go
 
 I sorting.go er den modifiserte bubble sort funksjonen som er en mer effektiv bubble sort algorytme.
 
