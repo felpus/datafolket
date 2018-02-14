@@ -42,7 +42,19 @@ For å gå fra heksadesimal så må man starte med å vite at grunntallet er 16.
 
 
 Oppgave 2
+I oppgave 2/algorythms finner man sorting.go og sorting_test.go
 
+I sorting.go er den modifiserte bubble sort funksjonen som er en mer effektiv bubble sort algorytme.
+
+Sorting_test.go har en samling benchmarks som lar oss teste effektiviteten på de forskjellige algorytmene i programmet.
+https://github.com/felpus/datafolket/blob/master/Oppgave%202/algorithms/benchmarkresult.PNG
+Bubble sort er en algorytme som blir svært ineffektiv jo mer tid kalkulasjonen tar, den er plasseffektiv men fungerer svært dårlig ved høyt antall operasjoner.
+
+Vår modifiserte bubble stort algorytme er betydelig raskere, den er nesten 20% raskere på 10000 benchmarken, ca 40% på 1000 og går ned til ca 10% på 100.
+
+Quicksort algorytmen er betydelig raskere, nesten tre ganger så rask i alle tre benchmark testene.
+
+Ifølge Big-O så er quicksort algorytmen bedre i et gjennomsnittlig tilfelle og tilsvarende bubble sort i det dårligste tilfelle. I beste tilfelle så er faktisk Bubble sort mer effektiv.
 
 Oppgave 3                                                                                 
 Denne oppgaven er besvart i infinite_main.go og infinite.go i mappen infinite. Programmet bruker ikke nevneverdig mye CPU og RAM når det kjører (1-2%). Når SIGINT-signal mottas skriver programmet ut «You pressed ctrl + C. User interrupted infinite loop.». 
