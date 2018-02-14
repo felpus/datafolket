@@ -1,20 +1,20 @@
 # datafolket
-Oppgave 1
-Binære tall	
+Oppgave 1                                                                             
+Binære tall	                                                                                                          
 1101	             	             
 110111101010	                                          	            
 1010111100110100	                                               
 1111111111111111	                                                        	          
 10001011110001010                     
 
-Hexadesimaltall
+Hexadesimaltall                                                                                                                   
 0xD                                                       
 0xDEA                                                             
 0xAF34                                                            
 0xFFFF                                                        
 0x1178A	                                                          
 
-Desimaltall
+Desimaltall                                                                                                                   
 13                                                              
 3562                                                        
 44852                                                                   
