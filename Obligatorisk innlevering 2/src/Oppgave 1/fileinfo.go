@@ -54,21 +54,21 @@ func fileInfo(filnavn string) {
 		fmt.Println("Has Unix permission bits:", fileInfo.Mode().Perm())
 
 		//Sjekker om filen er "Append only" eller ikke
-		if fileInfo.Mode()&os.ModeAppend == os.ModeAppend {
+		if fileInfo.Mode() & os.ModeAppend == os.ModeAppend {
 			fmt.Println("Is append only")
 		} else {
 			fmt.Println("Is not append only")
 		}
 
 		//Sjekker om filen er en device file eller ikke
-		if fileInfo.Mode()&os.ModeDevice == os.ModeDevice {
+		if fileInfo.Mode() & os.ModeDevice == os.ModeDevice {
 			fmt.Println("Is a device file")
 		} else {
 			fmt.Println("Is not a device file")
 		}
 
 		//Viser om filen er en symbolsk link eller ikke
-			if fileInfo.Mode()&os.ModeSymlink == os.ModeSymlink {
+			if fileInfo.Mode() & os.ModeSymlink == os.ModeSymlink {
 				fmt.Println("Is a symbolic link")
 			} else {
 				fmt.Println("Is not a Symbolic link")
