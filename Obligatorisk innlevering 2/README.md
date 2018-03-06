@@ -1,6 +1,6 @@
 Oppgave 1.                                                                                                          
 Både .go-fil og kjørbar fil er lastet opp, disse ligger i samme mappe. Kan kjøres i kommandolinje med "fileinfo <filnavn>".
-Har prøvd å kjøre med en vanlig .txt-fil med kort, tilfeldig tekst, og får output som ser slik ut:
+Har prøvd å kjøre med en vanlig .txt-fil med kort, tilfeldig tekst, og får output som ser slik ut:                                  
 Infomation about file: test/test.txt                                                                                    
 Bytes:  577                                                                                                                 
 Kilobytes:  0.5634765625                                                                                                          
