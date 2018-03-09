@@ -8,6 +8,7 @@ import (
 	"strings"
 	"strconv"
 	"os/signal"
+	"time"
 )
 
 func main() {
@@ -21,6 +22,7 @@ func main() {
 	addtofile()
 	sumfromfile()
 	readResult("stdout.txt")
+	time.Sleep(10 * 1e9)
 }
 
 func addtofile() {

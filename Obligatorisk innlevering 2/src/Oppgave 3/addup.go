@@ -17,9 +17,8 @@ func main() {
 	}()
 	c := make(chan int)
 	go readInput(c)
-	time.Sleep(5 * 1e9)
 	go addUp(c)
-	time.Sleep(1 * 1e9)
+	time.Sleep(10 * 1e9)
 }
 
 func addUp(c chan int) {
