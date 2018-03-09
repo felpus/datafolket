@@ -22,6 +22,12 @@ func main() {
 	time.Sleep(1 * 1e9)
 }
 
+func addUp(c chan int) {
+	n1, n2 := <-c, <-c
+	res := n1 + n2
+	c <- res
+}
+
 func readInput(c chan int) {
 	var n1 int
 	var n2 int
@@ -35,8 +41,3 @@ func readInput(c chan int) {
 	fmt.Println("Resultat: ", res)
 }
 
-func addUp(c chan int) {
-	n1, n2 := <-c, <-c
-	res := n1 + n2
-	c <- res
-}

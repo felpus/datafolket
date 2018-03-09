@@ -10,6 +10,19 @@ import (
 	"os/signal"
 )
 
+func main() {
+	d := make(chan os.Signal, 1)
+	signal.Notify(d, os.Interrupt)
+	go func() {
+		<-d
+		fmt.Println("Feilmelding")
+		os.Exit(1)
+	}()
+	addtofile()
+	sumfromfile()
+	readResult("stdout.txt")
+}
+
 func addtofile() {
 	var n1 int
 	var n2 int
@@ -34,12 +47,6 @@ func addtofile() {
 	}
 }
 
-func checkErr(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
 func readResult(path string) {
 	data, err := ioutil.ReadFile(path)
 	checkErr(err)
@@ -51,15 +58,8 @@ func readResult(path string) {
 	fmt.Println("Resultat: ", resultat)
 }
 
-func main() {
-	d := make(chan os.Signal, 1)
-	signal.Notify(d, os.Interrupt)
-	go func() {
-		<-d
-		fmt.Println("Feilmelding")
-		os.Exit(1)
-	}()
-	addtofile()
-	sumfromfile()
-	readResult("stdout.txt")
+func checkErr(e error) {
+	if e != nil {
+		panic(e)
+	}
 }
