@@ -27,7 +27,8 @@ func TCP() {
 	CheckError(err)
 	defer conn.Close()
 	for {
-		fmt.Printf("Error during typing: %v", err)
+		_, err := conn.Write([]byte(quote))
+		CheckError(err)
 	}
 }
 func UDP() {
