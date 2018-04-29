@@ -13,6 +13,8 @@ func main() {
 	go TCP()
 	go UDP()
 	fmt.Println("Tjener starter")
+	select {
+	}
 }
 func CheckError(err error) {
 	if err != nil {
@@ -38,11 +40,12 @@ func UDP() {
 	CheckError(err)
 	defer connection.Close()
 
-	p := make([]byte, 128)
+	p := make([]byte, 1)
 
 	for {
 		_, addr, err := connection.ReadFromUDP(p)
 		connection.WriteToUDP([]byte(quote), addr)
 		CheckError(err)
+
 	}
 }
