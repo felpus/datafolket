@@ -7,3 +7,4 @@ Disse forslagene vil presenteres som pins på et Google Maps-kart på samme side
 Tjenesten vil i utgangspunktet komme med relativt enkle anbefalinger, men kan enkelt utvides til å passe mer avanserte værforhold. Tjenesten utvikles som en web-tjeneste, som gjør at den også enkelt kan porteres over til for eksempel mobile operativsystemer (iOS og Android) via såkalte "web views".
 
 Arkitektur:
+Nodene i vår systemarkitektur er en klient som kjører applikasjonen vår. Denne applikasjonen starter en webserver som lytter på port ":XXXX". Webserveren lager og sender en API-request til openweathermap.org for å hente data i JSON-form.
