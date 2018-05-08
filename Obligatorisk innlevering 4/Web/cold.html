@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather by Stum</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 600px;
+		width: 600px;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  
+  <body>
+  <div id="overskrift">
+        <h2>Aktivitetsplanlegger for {{.Name}}</h2>
+</div>
+
+<div style="margin-left:15px">
+    <h1>Været akkurat nå:</h1>
+    <p>Temperatur: {{.Main.Temp}} &#8451;</p>
+    <p>Vindhastighet: {{.Wind.Speed}} m/s</p>
+    <p>Luftfuktighet: {{.Main.Humidity}} %</p>
+    <p>Nedbør: {{.Main.Rain}} </p>
+</div>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: new google.maps.LatLng(58.1466756,7.9970177),
+          mapTypeId: 'roadmap'
+        });
+
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var icons = {
+          parking: {
+            icon: iconBase + 'parking_lot_maps.png'
+          },
+          library: {
+            icon: iconBase + 'library_maps.png'
+          },
+          info: {
+            icon: iconBase + 'info-i_maps.png'
+          }
+        };
+
+        var features = [
+          {
+            position: new google.maps.LatLng(58.149572, 7.993256),
+            type: 'info'
+          }, {
+            position: new google.maps.LatLng(58.158111, 8.025668),
+            type: 'info'
+          }, {
+            position: new google.maps.LatLng(58.142976, 7.994475),
+            type: 'info'
+          }, {
+		    position: new google.maps.LatLng(58.145106, 7.996144),
+            type: 'info'
+          }, {
+		    position: new google.maps.LatLng(58.147049, 8.006690),
+            type: 'info'
+          }, {
+
+          }
+        ];
+
+        // Create markers.
+        features.forEach(function(feature) {
+          var marker = new google.maps.Marker({
+            position: feature.position,
+            icon: icons[feature.type].icon,
+            map: map
+          });
+        });
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRjBLVpM9oxUApGr4tfPuoYsuZ_TjpDBU&callback=initMap">
+    </script>
+  </body>
+</html>
