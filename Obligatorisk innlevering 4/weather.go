@@ -78,7 +78,7 @@ func mainMsg(w http.ResponseWriter, r *http.Request) {
 	if (msg.Main.Temp < 10) {
 		fmt.Fprintf(w, "Langbuksevær i dag! Temperaturen er %f! Krysser fingrene for bedre vær i %s.",msg.Main.Temp, msg.Name)
 		if (msg.Main.Humidity > 80){
-			fmt.Fprintf(w, "Høy luftfuktighet i dag, hele %d! Kanskje det er lurt å ta med paraply om du skal ut?",msg.Main.Humidity)
+			fmt.Fprintf(w, "Høy luftfuktighet i dag, hele %d!",msg.Main.Humidity)
 		}
 		if (msg.Main.Humidity < 30){
 			fmt.Fprintf(w, "Lav luftfuktighet i dag, så lavt som %d!",msg.Main.Humidity)
