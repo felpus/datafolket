@@ -6,11 +6,14 @@ import (
 	"io/ioutil"
 	"encoding/json"
 	"log"
+	"runtime"
+	"os/exec"
+	"html/template"
 )
 
 //Definerer structs for json-innlesing
 type WeatherData struct {
-	Weather [] struct {
+	Weather struct {
 		ID          int    `json:"id"`
 		Main        string `json:"main"`
 		Description string `json:"description"`
@@ -31,14 +34,25 @@ type WeatherData struct {
 	Name string `json:"name"`
 }
 
-//Lytter til port
+//Lytter til port og åpner nettleser
 func main() {
+	nettleser("http://localhost:8080/")
 	http.HandleFunc("/", mainMsg)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
+//Åpner nettleser
+func nettleser(url string) bool {
+	var args []string
+	switch runtime.GOOS {
+	case "windows":
+		args = []string{"cmd", "/c", "start"}
+	}
+	cmd := exec.Command(args[0], append(args[1:], url)...)
+	return cmd.Start() == nil
+}
 
-//Henter API
+//Henter API fra Kristiansand ved cityID 6453405
 func mainMsg(w http.ResponseWriter, r *http.Request) {
 	res, _ := http.Get("http://api.openweathermap.org/data/2.5/weather?id=6453405&APPID=2824f4858c14c0799bb09f88fee6a7f0")
 	weather, _ := ioutil.ReadAll(res.Body)
@@ -52,40 +66,51 @@ func mainMsg(w http.ResponseWriter, r *http.Request) {
 //if-statements for å bestemme bekledning, sett opp mot temperaturen i Kristiansand
 	if (msg.Main.Temp > 18){
 
-		fmt.Fprintf(w, "Temperaturen i dag er %f! Finn frem shortsen, det er sommer i %s!",msg.Main.Temp, msg.Name)
+		msg.Weather.Description = fmt.Sprintf("Temperaturen i dag er %2.1f grader! Finn frem shortsen, det er sommer i %s!" +"\n",msg.Main.Temp, msg.Name)
 		if (msg.Main.Humidity > 80){
-			fmt.Fprintf(w, "Høy luftfuktighet i dag, hele %d!",msg.Main.Humidity)
+			msg.Weather.Description += fmt.Sprintf("Høy luftfuktighet i dag, hele %d!",msg.Main.Humidity)
 		}
 		if (msg.Main.Humidity < 30){
-			fmt.Fprintf(w, "Lav luftfuktighet i dag, så lavt som %d!",msg.Main.Humidity)
+			msg.Weather.Description += fmt.Sprintf("Lav luftfuktighet i dag, så lavt som %d!",msg.Main.Humidity)
 		}
 		if (msg.Main.Humidity < 80 && msg.Main.Humidity > 30){
-			fmt.Fprintf(w, "Helt moderat luftfuktighet i dag, %d.",msg.Main.Humidity)
+			msg.Weather.Description += fmt.Sprintf("Helt moderat luftfuktighet i dag, %d.",msg.Main.Humidity)
 		}
 	}
 	if (msg.Main.Temp < 18 && msg.Main.Temp > 10){
-		fmt.Fprintf(w, "Temperaturen i dag er %f! Det nærmer seg sommervær i %s!" +"\n",msg.Main.Temp, msg.Name)
+
+		msg.Weather.Description = fmt.Sprintf("Temperaturen i dag er %2.1f grader! Det nærmer seg sommervær i %s!" +"\n",msg.Main.Temp, msg.Name)
 		if (msg.Main.Humidity > 80){
-			fmt.Fprintf(w, "Høy luftfuktighet i dag, hele %d!",msg.Main.Humidity)
+			msg.Weather.Description += fmt.Sprintf("Høy luftfuktighet i dag, hele %d!",msg.Main.Humidity)
 		}
 		if (msg.Main.Humidity < 30){
-			fmt.Fprintf(w, "Lav luftfuktighet i dag, så lavt som %d!",msg.Main.Humidity)
+			msg.Weather.Description += fmt.Sprintf("Lav luftfuktighet i dag, så lavt som %d!",msg.Main.Humidity)
 		}
 		if (msg.Main.Humidity < 80 && msg.Main.Humidity > 30){
-			fmt.Fprintf(w, "Helt moderat luftfuktighet i dag, %d.",msg.Main.Humidity)
+			msg.Weather.Description += fmt.Sprintf("Helt moderat luftfuktighet i dag, %d.",msg.Main.Humidity)
 		}
 	}
 	if (msg.Main.Temp < 10) {
-		fmt.Fprintf(w, "Langbuksevær i dag! Temperaturen er %f! Krysser fingrene for bedre vær i %s.",msg.Main.Temp, msg.Name)
+
+		msg.Weather.Description = fmt.Sprintf("Langbuksevær i dag! Temperaturen er %2.1f grader! Krysser fingrene for bedre vær i %s." +"\n",msg.Main.Temp, msg.Name)
 		if (msg.Main.Humidity > 80){
-			fmt.Fprintf(w, "Høy luftfuktighet i dag, hele %d! Kanskje det er lurt å ta med paraply om du skal ut?",msg.Main.Humidity)
+			msg.Weather.Description += fmt.Sprintf("Høy luftfuktighet i dag, hele %d! Kanskje det er lurt å ta med paraply om du skal ut?",msg.Main.Humidity)
 		}
 		if (msg.Main.Humidity < 30){
-			fmt.Fprintf(w, "Lav luftfuktighet i dag, så lavt som %d!",msg.Main.Humidity)
+			msg.Weather.Description += fmt.Sprintf("Lav luftfuktighet i dag, så lavt som %d!",msg.Main.Humidity)
 		}
 		if (msg.Main.Humidity < 80 && msg.Main.Humidity > 30){
-			fmt.Fprintf(w, "Helt moderat luftfuktighet i dag, %d.",msg.Main.Humidity)
+			msg.Weather.Description += fmt.Sprintf("Helt moderat luftfuktighet i dag, %d.",msg.Main.Humidity)
 		}
 	}
+	//Mater data til Warm.html
+	temp, err := template.ParseFiles("Warm.html")
+	if err != nil {
+		log.Print(err)
+	}
 
+	err = temp.Execute(w, msg)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
