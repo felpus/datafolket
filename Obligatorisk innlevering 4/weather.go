@@ -104,7 +104,7 @@ func mainMsg(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	//Mater data til Warm.html
-	temp, err := template.ParseFiles("Warm.html")
+	temp, err := template.ParseFiles("html/Warm.html")
 	if err != nil {
 		log.Print(err)
 	}
