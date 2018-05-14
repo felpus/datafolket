@@ -11,7 +11,7 @@ import (
 	"html/template"
 )
 
-//Definerer structs for json-innlesing
+//Definerer structs for json-innlesing, ved template.ParseFiles funksjonen så åpnes den nevnte filen med data fra denne strukturen
 type WeatherData struct {
 	Weather struct {
 		ID          int    `json:"id"`
@@ -34,7 +34,8 @@ type WeatherData struct {
 	Name string `json:"name"`
 }
 
-//Lytter til port og åpner nettleser
+//Lytter til port og åpner nettleser, for å utvide funksjonalitet kan man legge til f.eks http.HandleFunc("/1", <funksjon her>)
+//"http://localhost:8080/" bestemmer hvilken funksjon som kjøres først, endres den til "http://localhost:8080/1" så kjøres funksjonen på pattern "/1" først, pattern er bare "/" foreløpig.
 func main() {
 	nettleser("http://localhost:8080/")
 	http.HandleFunc("/", mainMsg)
@@ -53,6 +54,7 @@ func nettleser(url string) bool {
 }
 
 //Henter API fra Kristiansand ved cityID 6453405
+//For å legge til flere byer kan denne kalles func kristiansandWeather og kopieres og kalle den nye byen f.eks bergenWeather, deretter endre verdier og avhengig kode.
 func mainMsg(w http.ResponseWriter, r *http.Request) {
 	res, _ := http.Get("http://api.openweathermap.org/data/2.5/weather?id=6453405&APPID=2824f4858c14c0799bb09f88fee6a7f0")
 	weather, _ := ioutil.ReadAll(res.Body)
@@ -64,6 +66,7 @@ func mainMsg(w http.ResponseWriter, r *http.Request) {
 	msg.Main.Temp = msg.Main.Temp - 273.15
 
 //if-statements for å bestemme bekledning, sett opp mot temperaturen i Kristiansand
+//Bør gjøres om til egen funksjon som kalles for hver enkelt by, slik at den ikke må hardkodes i enhver funksjon.
 	if (msg.Main.Temp > 18){
 
 		msg.Weather.Description = fmt.Sprintf("Temperaturen i dag er %2.1f grader! Finn frem shortsen, det er sommer i %s!" +"\n",msg.Main.Temp, msg.Name)
